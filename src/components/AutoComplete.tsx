@@ -19,29 +19,37 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions: initialSuggest
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setInputValue(suggestions[activeSuggestionIndex]);
-      setShowSuggestions(false);
-    } else if (e.key === 'ArrowUp') {
-      if (activeSuggestionIndex === 0) return;
-      setActiveSuggestionIndex(activeSuggestionIndex - 1);
-    } else if (e.key === 'ArrowDown') {
-      if (activeSuggestionIndex === suggestions.length - 1) return;
-      setActiveSuggestionIndex(activeSuggestionIndex + 1);
+    switch (e.key) {
+      case 'Enter':
+        setInputValue(suggestions[activeSuggestionIndex]);
+        setShowSuggestions(false);
+        break;
+      case 'ArrowUp':
+        if (activeSuggestionIndex > 0) {
+          setActiveSuggestionIndex(activeSuggestionIndex - 1);
+        }
+        break;
+      case 'ArrowDown':
+        if (activeSuggestionIndex < suggestions.length - 1) {
+          setActiveSuggestionIndex(activeSuggestionIndex + 1);
+        }
+        break;
+      default:
+        break;
     }
   };
 
-  const highlightText = (text: string, highlight: string) => {
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+  const highlightText = (fullText: string, searchText: string) => {
+    const searchRegex = new RegExp(`(${searchText})`, 'gi');
     return (
       <span>
-        {parts.map((part, index) =>
-          part.toLowerCase() === highlight.toLowerCase() ? (
-            <span key={index} className="highlight">
-              {part}
+        {fullText.split(searchRegex).map((segment, idx) =>
+          searchRegex.test(segment) ? (
+            <span key={idx} className="highlight">
+              {segment}
             </span>
           ) : (
-            part
+            segment
           )
         )}
       </span>
@@ -77,7 +85,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions: initialSuggest
               );
             })
           ) : (
-            <li className="no-suggestions">No suggestions</li>
+            <li className="no-match-found">No match found</li>
           )}
         </ul>
       )}
