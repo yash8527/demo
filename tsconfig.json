@@ -1,7 +1,11 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "jsx": "react",
+    // other options...
+  },
+  "include": [
+    "src",
+    "__tests__"
   ]
 }
