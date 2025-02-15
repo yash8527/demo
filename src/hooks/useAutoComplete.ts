@@ -32,7 +32,7 @@ const useAutoComplete = () => {
         try {
             const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
             const data = await response.json();
-            const allTitles = data.map((item: { title: string }) => item.title);
+            const allTitles = data.map((item: { title: string }) => item.title.substring(0, 30));
             setAllData(allTitles);
         } catch (err) {
             setError('Failed to fetch data');
