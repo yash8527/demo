@@ -1,50 +1,84 @@
-# React + TypeScript + Vite
+# AutoComplete Component
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple and efficient auto-complete component built with React and TypeScript. It demonstrates how to create a production-ready component without relying on third-party libraries, focusing on performance and user experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Asynchronous data fetching and filtering.
+- Highlighting of matching text in suggestions.
+- Handles edge cases for a smooth user experience.
+- Built using functional components and hooks.
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+auto-complete-component
+├── src
+│   ├── components
+│   │   └── AutoComplete.tsx
+│   ├── hooks
+│   │   └── useAutoComplete.ts
+│   ├── types
+│   │   └── index.ts
+│   ├── App.tsx
+│   └── index.tsx
+├── public
+│   └── index.html
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Getting Started
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Prerequisites
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+- Node.js (version 14 or higher)
+- npm (Node Package Manager)
+
+### Installation
+
+1. Clone the repository:
+
+   ```
+   git clone <repository-url>
+   cd auto-complete-component
+   ```
+
+2. Install the dependencies:
+
+   ```
+   npm install
+   ```
+
+### Running the Application
+
+To start the development server, run:
+
 ```
+npm start
+```
+
+This will launch the application in your default web browser. The auto-complete component should be visible and functional.
+
+### Building for Production
+
+To create a production build, run:
+
+```
+npm run build
+```
+
+This will generate an optimized build of the application in the `build` directory.
+
+## Usage
+
+You can use the `AutoComplete` component in your application by importing it from the `components` directory. It accepts props defined in the `AutoCompleteProps` interface.
+
+## Contributing
+
+If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.
+
+## License
+
+This project is open-source and available under the [MIT License](LICENSE).
