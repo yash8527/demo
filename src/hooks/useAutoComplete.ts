@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import useDebounce from './useDebounce';
 
 const useAutoComplete = (allData: string[]) => {
@@ -7,25 +7,25 @@ const useAutoComplete = (allData: string[]) => {
 
     const debouncedInputValue = useDebounce(inputValue, 300);
 
-    useEffect(() => {
-        const fetchFilteredSuggestions = async () => {
-            if (debouncedInputValue) {
-                // Simulate an asynchronous operation as mentioned in the instructions. //
-                const filtered = await new Promise<string[]>((resolve) => {
-                    setTimeout(() => {
-                        const result = allData.filter(title =>
-                            title.toLowerCase().includes(debouncedInputValue.toLowerCase())
-                        );
-                        resolve(result);
-                    }, 100);
-                });
-                setFilteredSuggestions(filtered);
-            } else {
-                setFilteredSuggestions([]);
-            }
-        };
+    const fetchFilteredSuggestions = async (debouncedInputValue: string) => {
+        if (debouncedInputValue) {
+            // Simulate an asynchronous operation as mentioned in the instructions.
+            const filtered = await new Promise<string[]>((resolve) => {
+                setTimeout(() => {
+                    const result = allData.filter(title =>
+                        title.toLowerCase().includes(debouncedInputValue.toLowerCase())
+                    );
+                    resolve(result);
+                }, 100);
+            });
+            setFilteredSuggestions(filtered);
+        } else {
+            setFilteredSuggestions([]);
+        }
+    };
 
-        fetchFilteredSuggestions();
+    useMemo(() => {
+        fetchFilteredSuggestions(debouncedInputValue);
     }, [debouncedInputValue, allData]);
 
     return {
