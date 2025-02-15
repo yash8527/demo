@@ -30,7 +30,8 @@ const App: React.FC = () => {
       <h1>Autocomplete</h1>
       <p>Search for solutions that deal provides.</p>
       {error && <div>{error}</div>}
-      <AutoComplete suggestions={suggestions} loading={loading} />
+      {loading && <div>Fetching Data</div>}
+      <AutoComplete suggestions={suggestions} />
     </div>
   );
 };

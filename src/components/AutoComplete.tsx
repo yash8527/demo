@@ -4,10 +4,9 @@ import '../styles/AutoComplete.css';
 
 interface AutoCompleteProps {
   suggestions: string[];
-  loading: boolean;
 }
 
-const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions, loading }) => {
+const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
   const { inputValue, setInputValue, filteredSuggestions } = useAutoComplete(suggestions);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -69,7 +68,6 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions, loading }) => 
         value={inputValue}
         className="autocomplete-input"
       />
-      {loading && <div>Loading...</div>}
       {showSuggestions && inputValue && (
         <ul className="suggestions">
           {filteredSuggestions.length ? (
