@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { AutoCompleteProps } from '../types';
 import useAutoComplete from '../hooks/useAutoComplete';
 import '../styles/AutoComplete.css';
 
-const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions: initialSuggestions }) => {
-  const { inputValue, setInputValue, suggestions, loading } = useAutoComplete(initialSuggestions);
+const AutoComplete: React.FC = () => {
+  const { inputValue, setInputValue, suggestions, loading } = useAutoComplete();
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
@@ -56,7 +55,6 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions: initialSuggest
     );
   };
 
-  
   return (
     <div className="autocomplete">
       <input

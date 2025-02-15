@@ -16,43 +16,45 @@ const useDebounce = (value: string, delay: number) => {
     return debouncedValue;
 };
 
-const useAutoComplete = (data: string[]) => {
+const useAutoComplete = () => {
     const [inputValue, setInputValue] = useState<string>('');
     const [suggestions, setSuggestions] = useState<string[]>([]);
+    const [allData, setAllData] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
     const debouncedInputValue = useDebounce(inputValue, 300);
 
-    // Function to filter suggestions asynchronously
-    const fetchSuggestions = useCallback(async (input: string) => {
+    // Function to fetch all data from the fake REST API
+    const fetchAllData = useCallback(async () => {
         setLoading(true);
         setError(null);
         try {
-            // Simulating an API call with a timeout
-            const filteredSuggestions = await new Promise<string[]>((resolve) => {
-                setTimeout(() => {
-                    const filtered = data.filter(item =>
-                        item.toLowerCase().includes(input.toLowerCase())
-                    );
-                    resolve(filtered);
-                }, 300);
-            });
-            setSuggestions(filteredSuggestions);
+            const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+            const data = await response.json();
+            const allTitles = data.map((item: { title: string }) => item.title);
+            setAllData(allTitles);
         } catch (err) {
-            setError('Failed to fetch suggestions');
+            setError('Failed to fetch data');
         } finally {
             setLoading(false);
         }
-    }, [data]);
+    }, []);
+
+    useEffect(() => {
+        fetchAllData();
+    }, [fetchAllData]);
 
     useEffect(() => {
         if (debouncedInputValue) {
-            fetchSuggestions(debouncedInputValue);
+            const filteredSuggestions = allData.filter(title =>
+                title.toLowerCase().includes(debouncedInputValue.toLowerCase())
+            );
+            setSuggestions(filteredSuggestions);
         } else {
             setSuggestions([]);
         }
-    }, [debouncedInputValue, fetchSuggestions]);
+    }, [debouncedInputValue, allData]);
 
     return {
         inputValue,
