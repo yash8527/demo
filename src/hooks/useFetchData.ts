@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface Post {
-  title: string;
-}
+import { Post } from '../types';
 
 const useFetchData = () => {
   const [suggestions, setSuggestions] = useState<string[]>([]);

@@ -1,5 +1,7 @@
 export interface AutoCompleteProps {
-    suggestions: string[];
-  }
-  
-  export type Suggestion = string;
+  suggestions: string[];
+}
+
+export interface Post {
+  title: string;
+}

@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import useAutoComplete from '../hooks/useAutoComplete';
 import '../styles/AutoComplete.css';
-
-interface AutoCompleteProps {
-  suggestions: string[];
-}
+import { AutoCompleteProps } from '../types';
 
 const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
   const { inputValue, setInputValue, filteredSuggestions } = useAutoComplete(suggestions);
