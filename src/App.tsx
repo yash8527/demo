@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import AutoComplete from './components/AutoComplete';
 
 const App: React.FC = () => {
@@ -6,7 +6,7 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchAllData = useCallback(async () => {
+  const fetchAllData = async () => {
     setLoading(true);
     setError(null);
     try {
@@ -19,11 +19,11 @@ const App: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
   useEffect(() => {
     fetchAllData();
-  }, [fetchAllData]);
+  }, []);
 
   return (
     <div className="App">

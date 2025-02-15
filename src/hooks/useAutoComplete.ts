@@ -23,14 +23,24 @@ const useAutoComplete = (allData: string[]) => {
     const debouncedInputValue = useDebounce(inputValue, 300);
 
     useEffect(() => {
-        if (debouncedInputValue) {
-            const filtered = allData.filter(title =>
-                title.toLowerCase().includes(debouncedInputValue.toLowerCase())
-            );
-            setFilteredSuggestions(filtered);
-        } else {
-            setFilteredSuggestions([]);
-        }
+        const fetchFilteredSuggestions = async () => {
+            if (debouncedInputValue) {
+                // Simulate an asynchronous operation
+                const filtered = await new Promise<string[]>((resolve) => {
+                    setTimeout(() => {
+                        const result = allData.filter(title =>
+                            title.toLowerCase().includes(debouncedInputValue.toLowerCase())
+                        );
+                        resolve(result);
+                    }, 100);
+                });
+                setFilteredSuggestions(filtered);
+            } else {
+                setFilteredSuggestions([]);
+            }
+        };
+
+        fetchFilteredSuggestions();
     }, [debouncedInputValue, allData]);
 
     return {
