@@ -56,6 +56,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions: initialSuggest
     );
   };
 
+  
   return (
     <div className="autocomplete">
       <input
@@ -69,21 +70,15 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions: initialSuggest
       {showSuggestions && inputValue && (
         <ul className="suggestions">
           {suggestions.length ? (
-            suggestions.map((suggestion, index) => {
-              let className;
-              if (index === activeSuggestionIndex) {
-                className = 'suggestion-active';
-              }
-              return (
-                <li
-                  key={suggestion}
-                  className={className}
-                  onClick={() => handleClick(suggestion)}
-                >
-                  {highlightText(suggestion, inputValue)}
-                </li>
-              );
-            })
+            suggestions.map((suggestion, index) => (
+              <li
+                key={suggestion}
+                className={index === activeSuggestionIndex ? 'suggestion-active' : ''}
+                onClick={() => handleClick(suggestion)}
+              >
+                {highlightText(suggestion, inputValue)}
+              </li>
+            ))
           ) : (
             <li className="no-match-found">No match found</li>
           )}
