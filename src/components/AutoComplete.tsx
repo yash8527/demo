@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import useAutoComplete from '../hooks/useAutoComplete';
 import '../styles/AutoComplete.css';
 
-const AutoComplete: React.FC = () => {
-  const { inputValue, setInputValue, suggestions, loading } = useAutoComplete();
+interface AutoCompleteProps {
+  suggestions: string[];
+  loading: boolean;
+}
+
+const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions, loading }) => {
+  const { inputValue, setInputValue, filteredSuggestions } = useAutoComplete(suggestions);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
@@ -20,7 +25,7 @@ const AutoComplete: React.FC = () => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     switch (e.key) {
       case 'Enter':
-        setInputValue(suggestions[activeSuggestionIndex]);
+        setInputValue(filteredSuggestions[activeSuggestionIndex]);
         setShowSuggestions(false);
         break;
       case 'ArrowUp':
@@ -29,7 +34,7 @@ const AutoComplete: React.FC = () => {
         }
         break;
       case 'ArrowDown':
-        if (activeSuggestionIndex < suggestions.length - 1) {
+        if (activeSuggestionIndex < filteredSuggestions.length - 1) {
           setActiveSuggestionIndex(activeSuggestionIndex + 1);
         }
         break;
@@ -67,8 +72,8 @@ const AutoComplete: React.FC = () => {
       {loading && <div>Loading...</div>}
       {showSuggestions && inputValue && (
         <ul className="suggestions">
-          {suggestions.length ? (
-            suggestions.map((suggestion, index) => (
+          {filteredSuggestions.length ? (
+            filteredSuggestions.map((suggestion, index) => (
               <li
                 key={suggestion}
                 className={index === activeSuggestionIndex ? 'suggestion-active' : ''}
