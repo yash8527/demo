@@ -1,42 +1,65 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+
+const useDebounce = (value: string, delay: number) => {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [value, delay]);
+
+    return debouncedValue;
+};
 
 const useAutoComplete = (data: string[]) => {
     const [inputValue, setInputValue] = useState<string>('');
     const [suggestions, setSuggestions] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const debouncedInputValue = useDebounce(inputValue, 300);
 
     // Function to filter suggestions asynchronously
-    const fetchSuggestions = async (input: string) => {
+    const fetchSuggestions = useCallback(async (input: string) => {
         setLoading(true);
-        // Simulating an API call with a timeout
-        return new Promise<string[]>((resolve) => {
-            setTimeout(() => {
-                const filteredSuggestions = data.filter(item =>
-                    item.toLowerCase().includes(input.toLowerCase())
-                );
-                resolve(filteredSuggestions);
-            }, 300);
-        });
-    };
+        setError(null);
+        try {
+            // Simulating an API call with a timeout
+            const filteredSuggestions = await new Promise<string[]>((resolve) => {
+                setTimeout(() => {
+                    const filtered = data.filter(item =>
+                        item.toLowerCase().includes(input.toLowerCase())
+                    );
+                    resolve(filtered);
+                }, 300);
+            });
+            setSuggestions(filteredSuggestions);
+        } catch (err) {
+            setError('Failed to fetch suggestions');
+        } finally {
+            setLoading(false);
+        }
+    }, [data]);
 
     useEffect(() => {
-        if (inputValue) {
-            const loadSuggestions = async () => {
-                const results = await fetchSuggestions(inputValue);
-                setSuggestions(results);
-                setLoading(false);
-            };
-            loadSuggestions();
+        if (debouncedInputValue) {
+            fetchSuggestions(debouncedInputValue);
         } else {
             setSuggestions([]);
         }
-    }, [inputValue, data]);
+    }, [debouncedInputValue, fetchSuggestions]);
 
     return {
         inputValue,
         setInputValue,
         suggestions,
         loading,
+        error,
     };
 };
 
