@@ -2,7 +2,6 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "jsx": "react",
-    // other options...
   },
   "include": [
     "src",
