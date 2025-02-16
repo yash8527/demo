@@ -64,6 +64,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
         onKeyDown={handleKeyDown}
         value={inputValue}
         className="autocomplete-input"
+        placeholder='Search for lorem'
       />
       {isLoading && <div className="loader">Loading...</div>}
       {showSuggestions && inputValue && (
