@@ -4,7 +4,7 @@ import '../styles/AutoComplete.css';
 import { AutoCompleteProps } from '../types';
 
 const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
-  const { inputValue, setInputValue, filteredSuggestions } = useAutoComplete(suggestions);
+  const { inputValue, setInputValue, filteredSuggestions, isLoading } = useAutoComplete(suggestions);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
@@ -65,6 +65,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
         value={inputValue}
         className="autocomplete-input"
       />
+      {isLoading && <div className="loader">Loading...</div>}
       {showSuggestions && inputValue && (
         <ul className="suggestions">
           {filteredSuggestions.length ? (
@@ -78,7 +79,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
               </li>
             ))
           ) : (
-            <li className="no-match-found">No match found</li>
+            !isLoading && <li className="no-match-found">No match found</li>
           )}
         </ul>
       )}
