@@ -65,16 +65,19 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
         value={inputValue}
         className="autocomplete-input"
         placeholder='Search for lorem'
+        role="combobox"
+        aria-expanded={showSuggestions}
       />
       {isLoading && <div className="loader">Loading...</div>}
       {showSuggestions && inputValue && (
-        <ul className="suggestions">
+        <ul className="suggestions" role="listbox">
           {filteredSuggestions.length ? (
             filteredSuggestions.map((suggestion, index) => (
               <li
                 key={suggestion}
                 className={index === activeSuggestionIndex ? 'suggestion-active' : ''}
                 onClick={() => handleClick(suggestion)}
+                role="option"
               >
                 {highlightText(suggestion, inputValue)}
               </li>

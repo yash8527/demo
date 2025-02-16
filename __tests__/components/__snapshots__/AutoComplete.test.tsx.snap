@@ -5,10 +5,12 @@ exports[`AutoComplete Component should match snapshot 1`] = `
   className="autocomplete"
 >
   <input
+    aria-expanded={false}
     className="autocomplete-input"
     onChange={[Function]}
     onKeyDown={[Function]}
     placeholder="Search for lorem"
+    role="combobox"
     type="text"
     value=""
   />

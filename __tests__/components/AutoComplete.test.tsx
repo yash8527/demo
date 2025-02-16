@@ -12,12 +12,12 @@ describe('AutoComplete Component', () => {
   });
 
   it('renders input element', () => {
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
-    expect(screen.getByRole('textbox')).toHaveAttribute('placeholder', 'Search for lorem');
+    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    expect(screen.getByRole('combobox')).toHaveAttribute('placeholder', 'Search for lorem');
   });
 
   it('shows "No match found" when no suggestions match', () => {
-    const input = screen.getByRole('textbox');
+    const input = screen.getByRole('combobox');
     fireEvent.change(input, { target: { value: 'xyz' } });
     expect(screen.getByText(/no match found/i)).toBeInTheDocument();
   });
