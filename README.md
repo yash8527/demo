@@ -38,14 +38,7 @@ auto-complete-component
 
 ### Installation
 
-1. Clone the repository:
-
-   ```
-   git clone <repository-url>
-   cd auto-complete-component
-   ```
-
-2. Install the dependencies:
+ Install the dependencies:
 
    ```
    npm install
@@ -56,7 +49,7 @@ auto-complete-component
 To start the development server, run:
 
 ```
-npm start
+npm run dev
 ```
 
 This will launch the application in your default web browser. The auto-complete component should be visible and functional.
@@ -74,11 +67,3 @@ This will generate an optimized build of the application in the `build` director
 ## Usage
 
 You can use the `AutoComplete` component in your application by importing it from the `components` directory. It accepts props defined in the `AutoCompleteProps` interface.
-
-## Contributing
-
-If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.
-
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
