@@ -1,42 +1,60 @@
 .autocomplete {
-    position: relative;
-    width: 300px;
-  }
-  
-  .autocomplete-input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
-  .suggestions {
-    border: 1px solid #ccc;
-    border-top-width: 0;
-    list-style: none;
-    margin: 0;
-    max-height: 600px;
-    overflow-y: auto;
-    padding: 0;
-    position: absolute;
-    width: 100%;
-    z-index: 1;
-    background-color: white;
-  }
-  
-  .suggestions li {
-    padding: 8px;
-    cursor: pointer;
-  }
-  
-  .suggestions li.suggestion-active {
-    background-color: #e9e9e9;
-  }
-  
-  .suggestions li.no-match-found {
-    color: #999;
-  }
-  
-  .highlight {
-    font-weight: bold;
-    background-color: yellow;
-  }
+  position: relative;
+  width: 300px;
+  font-family: Arial, sans-serif;
+}
+
+.autocomplete-input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.suggestions {
+  border: 1px solid #ccc;
+  border-top-width: 0;
+  list-style: none;
+  margin: 0;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 4px 4px;
+}
+
+.suggestions li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.suggestions li.suggestion-active {
+  background-color: #f0f0f0;
+}
+
+.suggestions li.no-match-found {
+  color: #999;
+  padding: 10px;
+}
+
+.highlight {
+  font-weight: bold;
+  background-color: rgb(247, 197, 154);
+}
+
+.loader {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+.App{
+  margin: 5% 20% 5% 20%
+}

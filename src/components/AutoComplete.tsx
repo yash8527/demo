@@ -68,7 +68,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
         role="combobox"
         aria-expanded={showSuggestions}
       />
-      {isLoading && <div className="loader">Loading...</div>}
+      {(isLoading  && showSuggestions ) && <div className="loader">Loading...</div>}
       {showSuggestions && inputValue && (
         <ul className="suggestions" role="listbox">
           {filteredSuggestions.length ? (

@@ -7,7 +7,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <h1>Autocomplete Suggestion</h1>
+      <h2>Auto complete Suggestion</h2>
       {error && <div>{error}</div>}
       {loading && <div>Fetching Data</div>}
       <AutoComplete suggestions={suggestions} />
