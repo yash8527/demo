@@ -39,6 +39,11 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
     }
   };
 
+  const handleClear = () => {
+    setInputValue('');
+    setShowSuggestions(false);
+  };
+
   const highlightText = (fullText: string, searchText: string) => {
     const searchRegex = new RegExp(`(${searchText})`, 'gi');
     return (
@@ -58,16 +63,23 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
 
   return (
     <div className="autocomplete">
-      <input
-        type="text"
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        value={inputValue}
-        className="autocomplete-input"
-        placeholder='Search for lorem'
-        role="combobox"
-        aria-expanded={showSuggestions}
-      />
+      <div className="input-wrapper">
+        <input
+          type="text"
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          value={inputValue}
+          className="autocomplete-input"
+          placeholder='Search for lorem'
+          role="combobox"
+          aria-expanded={showSuggestions}
+        />
+        {inputValue && (
+          <button className="clear-button" onClick={handleClear} aria-label="Clear input">
+            &times;
+          </button>
+        )}
+      </div>
       {(isLoading  && showSuggestions ) && <div className="loader">Loading...</div>}
       {showSuggestions && inputValue && (
         <ul className="suggestions" role="listbox">

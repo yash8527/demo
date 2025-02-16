@@ -4,6 +4,10 @@
   font-family: Arial, sans-serif;
 }
 
+.input-wrapper {
+  position: relative;
+}
+
 .autocomplete-input {
   width: 100%;
   padding: 10px;
@@ -11,6 +15,22 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  padding-right: 30px;
+}
+
+.clear-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.clear-button:focus {
+  outline: none;
 }
 
 .suggestions {
@@ -53,8 +73,8 @@
   margin-top: 10px;
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color:gray;
 }
 .App{
-  margin: 5% 20% 5% 20%
+  margin: 2%
 }
