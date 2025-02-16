@@ -75,7 +75,17 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
           aria-expanded={showSuggestions}
         />
         {inputValue && (
-          <button className="clear-button" onClick={handleClear} aria-label="Clear input">
+          <button
+            className="clear-button"
+            onClick={handleClear}
+            aria-label="Clear input"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleClear();
+              }
+            }}
+          >
             &times;
           </button>
         )}

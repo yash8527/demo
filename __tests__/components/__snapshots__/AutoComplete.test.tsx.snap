@@ -4,15 +4,19 @@ exports[`AutoComplete Component should match snapshot 1`] = `
 <div
   className="autocomplete"
 >
-  <input
-    aria-expanded={false}
-    className="autocomplete-input"
-    onChange={[Function]}
-    onKeyDown={[Function]}
-    placeholder="Search for lorem"
-    role="combobox"
-    type="text"
-    value=""
-  />
+  <div
+    className="input-wrapper"
+  >
+    <input
+      aria-expanded={false}
+      className="autocomplete-input"
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Search for lorem"
+      role="combobox"
+      type="text"
+      value=""
+    />
+  </div>
 </div>
 `;

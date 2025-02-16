@@ -29,8 +29,9 @@
   cursor: pointer;
 }
 
-.clear-button:focus {
-  outline: none;
+.clear-button:focus-visible {
+  outline: 2px solid #007BFF;
+  outline-offset: 2px;
 }
 
 .suggestions {
