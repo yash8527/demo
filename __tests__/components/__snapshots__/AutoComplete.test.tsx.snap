@@ -1,3 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AutoComplete Component should match snapshot 1`] = `null`;
+exports[`AutoComplete Component should match snapshot 1`] = `
+<div
+  className="autocomplete"
+>
+  <input
+    className="autocomplete-input"
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    type="text"
+    value=""
+  />
+</div>
+`;
