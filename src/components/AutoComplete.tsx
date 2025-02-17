@@ -18,6 +18,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
     setShowSuggestions(false);
   };
 
+  // To handle keyboard navigation and selection of suggestions using arrow keys and Enter key //
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     switch (e.key) {
       case 'Enter':
@@ -44,6 +45,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
     setShowSuggestions(false);
   };
 
+  // To highlight the matching text in the suggestions //
   const highlightText = (fullText: string, searchText: string) => {
     const searchRegex = new RegExp(`(${searchText})`, 'gi');
     return (
@@ -90,7 +92,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ suggestions }) => {
           </button>
         )}
       </div>
-      {(isLoading  && showSuggestions ) && <div className="loader">Loading...</div>}
+      {(isLoading && showSuggestions) && <div className="loader">Loading...</div>}
       {showSuggestions && inputValue && (
         <ul className="suggestions" role="listbox">
           {filteredSuggestions.length ? (

@@ -8,6 +8,7 @@ const useAutoComplete = (allData: string[]) => {
 
     const debouncedInputValue = useDebounce(inputValue, 300);
 
+    // Fetch filtered suggestions based on the debounced input
     const fetchFilteredSuggestions = async (debouncedInputValue: string) => {
         if (debouncedInputValue) {
             setIsLoading(true);
@@ -27,7 +28,7 @@ const useAutoComplete = (allData: string[]) => {
             setIsLoading(false);
         }
     };
-
+    // Fetch filtered suggestions when the debounced input value changes //
     useMemo(() => {
         fetchFilteredSuggestions(debouncedInputValue);
     }, [debouncedInputValue, allData]);
